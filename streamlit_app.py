@@ -34,10 +34,3 @@ if ingredients_list:
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered! MellyMel!', icon="✅")
-
-og_dataset = session.table("smoothies.public.orders")
-edited_dataset = session.create_dataframe(editable_df)
-og_dataset.merge(edited_dataset
-                     , (og_dataset['ORDER_UID'] == edited_dataset['ORDER_UID'])
-                     , [when_matched().update({'ORDER_FILLED': edited_dataset['ORDER_FILLED']})]
-                    )
